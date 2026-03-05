@@ -12,7 +12,7 @@ import { SearchResult } from './search.service';
 // 4. API_KEY: a Google Cloud API key with the Google Sheets API enabled
 //
 // Expected sheet columns:
-//   A → Assyrian | B → English | C → Arabic  (row 1 is the header, skipped automatically)
+//   A → English | B → Arabic | C → Assyrian  (row 1 is the header, skipped automatically)
 // ─────────────────────────────────────────────────────────────
 const SHEET_ID = '1c-A7eN_mnIpCy5veySneOXplfNP9yiiF_25OmYzXqEo';
 const GID      = '586305198';
@@ -51,9 +51,9 @@ export class SearchServiceV2 {
     );
 
     return {
-      assyrian: rows.map(r => r[0]),
-      english:  rows.map(r => r[1]),
-      arabic:   rows.map(r => r[2]),
+      assyrian: rows.map(r => r[2]),
+      english:  rows.map(r => r[0]),
+      arabic:   rows.map(r => r[1]),
     };
   }
 }
