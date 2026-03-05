@@ -1,0 +1,251 @@
+/* ── Page layout ───────────────────────────────────────────── */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem 5rem;
+  min-height: 100vh;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  margin-bottom: 2.8rem;
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #fff 30%, #c9b96e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+/* ── Search ────────────────────────────────────────────────── */
+.search-wrapper {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.8rem;
+}
+
+.search-box {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1.4rem 0.85rem 2.9rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.search-input:focus {
+  border-color: rgba(201, 185, 110, 0.6);
+  background: rgba(255, 255, 255, 0.11);
+  box-shadow: 0 0 0 4px rgba(201, 185, 110, 0.12);
+}
+
+.search-hint {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.28);
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+/* ── Result card ───────────────────────────────────────────── */
+.result-card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  animation: cardIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+.result-section {
+  padding: 1.4rem 1.8rem;
+}
+
+.result-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1) 20%, rgba(255,255,255,0.1) 80%, transparent);
+}
+
+/* ── Language badge ────────────────────────────────────────── */
+.lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.75rem 0.22rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+
+.lang-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.lang-native {
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 0.9em;
+  opacity: 0.75;
+  text-transform: none;
+}
+
+.assyrian-badge {
+  background: rgba(99, 71, 255, 0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 71, 255, 0.3);
+}
+.assyrian-badge .lang-dot { background: #818cf8; }
+
+.english-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.english-badge .lang-dot { background: #34d399; }
+
+.arabic-badge {
+  background: rgba(251, 146, 60, 0.15);
+  color: #fcd34d;
+  border: 1px solid rgba(251, 146, 60, 0.25);
+}
+.arabic-badge .lang-dot { background: #fbbf24; }
+
+/* ── Result list ───────────────────────────────────────────── */
+.result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.result-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.result-list.rtl {
+  direction: rtl;
+}
+
+.result-index {
+  flex-shrink: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.result-text {
+  font-size: 0.975rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+}
+
+/* ── Skeleton loader ───────────────────────────────────────── */
+.skeleton-card {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.skeleton {
+  border-radius: 6px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.1)  50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-badge {
+  width: 90px;
+  height: 22px;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+
+.skeleton-line {
+  height: 13px;
+  margin-bottom: 0.55rem;
+}
+
+.skeleton-line:last-of-type {
+  margin-bottom: 0;
+}
+
+@keyframes shimmer {
+  from { background-position:  200% 0; }
+  to   { background-position: -200% 0; }
+}

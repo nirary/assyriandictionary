@@ -1,0 +1,84 @@
+<div class="page-wrapper">
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="hero-title">Assyrian Dictionary</h1>
+    <p class="hero-subtitle">ܩܡܘܣܐ ܐܬܘܪܝܐ &nbsp;·&nbsp; قاموس آشوري</p>
+  </header>
+
+  <!-- Search -->
+  <div class="search-wrapper">
+    <div class="search-box">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Type a word and press Enter…"
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+      />
+    </div>
+    <p class="search-hint" *ngIf="!results && !isLoading">Search in Assyrian, English or Arabic</p>
+  </div>
+
+  <!-- Skeleton -->
+  <div class="result-card skeleton-card" *ngIf="isLoading">
+    <div class="result-section" *ngFor="let s of [0,1,2]; let last = last">
+      <div class="skeleton skeleton-badge"></div>
+      <div class="skeleton skeleton-line" style="width:75%"></div>
+      <div class="skeleton skeleton-line" style="width:55%"></div>
+      <div *ngIf="!last" class="result-divider mt-3"></div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="result-card" *ngIf="results && !isLoading">
+
+    <div class="result-section">
+      <div class="lang-badge assyrian-badge">
+        <span class="lang-dot"></span>Assyrian
+        <span class="lang-native">ܐܬܘܪܝܐ</span>
+      </div>
+      <ul class="result-list">
+        <li *ngFor="let item of results.assyrian; let i = index">
+          <span class="result-index">{{ i + 1 }}</span>
+          <span class="result-text">{{ item }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="result-section">
+      <div class="lang-badge english-badge">
+        <span class="lang-dot"></span>English
+      </div>
+      <ul class="result-list">
+        <li *ngFor="let item of results.english; let i = index">
+          <span class="result-index">{{ i + 1 }}</span>
+          <span class="result-text">{{ item }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="result-section">
+      <div class="lang-badge arabic-badge">
+        <span class="lang-dot"></span>Arabic
+        <span class="lang-native">عربي</span>
+      </div>
+      <ul class="result-list rtl">
+        <li *ngFor="let item of results.arabic; let i = index">
+          <span class="result-index">{{ i + 1 }}</span>
+          <span class="result-text">{{ item }}</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
