@@ -19,6 +19,7 @@
         placeholder="Type a word and press Enter…"
         [(ngModel)]="searchQuery"
         (keyup.enter)="onSearch()"
+        (ngModelChange)="onQueryChange($event)"
       />
     </div>
     <p class="search-hint" *ngIf="!results && !isLoading">Search in Assyrian, English or Arabic</p>
@@ -26,57 +27,41 @@
 
   <!-- Skeleton -->
   <div class="result-card skeleton-card" *ngIf="isLoading">
-    <div class="result-section" *ngFor="let s of [0,1,2]; let last = last">
+    <div class="result-grid-header">
       <div class="skeleton skeleton-badge"></div>
-      <div class="skeleton skeleton-line" style="width:75%"></div>
-      <div class="skeleton skeleton-line" style="width:55%"></div>
-      <div *ngIf="!last" class="result-divider mt-3"></div>
+      <div class="skeleton skeleton-badge"></div>
+      <div class="skeleton skeleton-badge"></div>
+    </div>
+    <div class="result-row" *ngFor="let s of [0,1]">
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
     </div>
   </div>
 
   <!-- Results -->
   <div class="result-card" *ngIf="results && !isLoading">
 
-    <div class="result-section">
+    <!-- Header row -->
+    <div class="result-grid-header">
       <div class="lang-badge assyrian-badge">
-        <span class="lang-dot"></span>Assyrian
-        <span class="lang-native">ܐܬܘܪܝܐ</span>
+        <span class="lang-dot"></span>Assyrian <span class="lang-native">ܐܬܘܪܝܐ</span>
       </div>
-      <ul class="result-list">
-        <li *ngFor="let item of results.assyrian; let i = index">
-          <span class="result-index">{{ i + 1 }}</span>
-          <span class="result-text">{{ item }}</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="result-divider"></div>
-
-    <div class="result-section">
       <div class="lang-badge english-badge">
         <span class="lang-dot"></span>English
       </div>
-      <ul class="result-list">
-        <li *ngFor="let item of results.english; let i = index">
-          <span class="result-index">{{ i + 1 }}</span>
-          <span class="result-text">{{ item }}</span>
-        </li>
-      </ul>
+      <div class="lang-badge arabic-badge">
+        <span class="lang-dot"></span>Arabic <span class="lang-native">عربي</span>
+      </div>
     </div>
 
     <div class="result-divider"></div>
 
-    <div class="result-section">
-      <div class="lang-badge arabic-badge">
-        <span class="lang-dot"></span>Arabic
-        <span class="lang-native">عربي</span>
-      </div>
-      <ul class="result-list rtl">
-        <li *ngFor="let item of results.arabic; let i = index">
-          <span class="result-index">{{ i + 1 }}</span>
-          <span class="result-text">{{ item }}</span>
-        </li>
-      </ul>
+    <!-- One row per index -->
+    <div class="result-row" *ngFor="let item of results.english; let i = index">
+      <span class="result-text">{{ results.assyrian[i] }}</span>
+      <span class="result-text">{{ item }}</span>
+      <span class="result-text rtl">{{ results.arabic[i] }}</span>
     </div>
 
   </div>
