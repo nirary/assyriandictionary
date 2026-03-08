@@ -23,10 +23,13 @@ export class SearchServiceV2 {
 
   search(query: string): Observable<SearchResult> {
     const term = query.trim().toLowerCase();
-
-    // Google Visualization Query Language — filtering happens on Google's servers.
-    // lower() normalises case; CONTAINS does substring match.
-    const tq = `SELECT A, B, C WHERE lower(A) CONTAINS '${term}' OR lower(B) CONTAINS '${term}' OR lower(C) CONTAINS '${term}' LIMIT 20`;
+    // matches() uses RE2 regex on Google's servers.
+    // Pattern anchors to comma boundaries so "man" matches "man,men" but not "woman".
+    // matches() does full-string matching in GQL, so .* is needed to consume
+    // surrounding words. Supports both ASCII comma and Arabic comma (،).
+    const sep = `(\\s*[,،]\\s*)`;
+    const pattern = `(.*${sep}|^)${term}(${sep}.*|$)`;
+    const tq = `SELECT A, B, C WHERE lower(A) matches '${pattern}' OR lower(B) matches '${pattern}' OR lower(C) matches '${pattern}' LIMIT 20`;
 
     const url =
       `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq` +
